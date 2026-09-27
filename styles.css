@@ -1,0 +1,53 @@
+/* Plugin classes only; native data and geometry remain untouched. */
+.smc-semantic-hidden,
+.smc-semantic-hidden * {
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+.smc-semantic-compact > .canvas-node-container > :not(.smc-semantic-label),
+.smc-semantic-compact > .canvas-node-label,
+.smc-semantic-compact > .canvas-node-container > :not(.smc-semantic-label) * {
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+.smc-semantic-label,
+.smc-group-overview-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding: 0;
+  pointer-events: none;
+}
+.smc-fit-title {
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  width: var(--smc-label-width, 128px);
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: center;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  transform: scale(var(--smc-label-scale, 0));
+  transform-origin: center;
+  color: var(--text-normal);
+  pointer-events: none;
+  user-select: none;
+}
+.smc-group-overview-title {
+  font-weight: 700;
+  border-radius: 0.2em;
+  background-color: var(--background-primary);
+}
+.smc-group-native-label-hidden:not([contenteditable="true"]) {
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+.smc-group-overview:has(> .canvas-group-label[contenteditable="true"]) > .smc-group-overview-label {
+  display: none;
+}

@@ -1,0 +1,8 @@
+node_modules/
+main.js
+.test-build/
+.research/
+.npm-cache/
+VaultsforTest/
+*.tsbuildinfo
+.DS_Store

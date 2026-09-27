@@ -1,0 +1,32 @@
+{
+  "name": "semantic-map-canvas",
+  "version": "0.0.11",
+  "description": "Semantic zoom mode prototype for the official Obsidian Canvas.",
+  "main": "main.js",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "node esbuild.config.mjs",
+    "build": "tsc --noEmit && node esbuild.config.mjs production",
+    "lint": "eslint .",
+    "test": "node scripts/test.mjs",
+    "deploy:test": "npm run build && node scripts/deploy-test.mjs",
+    "version": "node version-bump.mjs && git add manifest.json versions.json",
+    "benchmark": "node scripts/benchmark.mjs",
+    "test:visual": "node scripts/visual-check.mjs"
+  },
+  "license": "0BSD",
+  "devDependencies": {
+    "@eslint/js": "9.39.5",
+    "@types/node": "22.20.4",
+    "esbuild": "0.25.5",
+    "eslint": "9.39.5",
+    "eslint-plugin-obsidianmd": "0.4.2",
+    "globals": "17.12.0",
+    "jiti": "2.7.0",
+    "linkedom": "0.18.12",
+    "obsidian": "1.13.1",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.46.4"
+  }
+}
