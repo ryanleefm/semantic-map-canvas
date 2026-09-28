@@ -4,6 +4,12 @@
 
 Semantic zoom for the official Obsidian Canvas. This early test release helps you move from detailed notes to a structured overview by zooming out.
 
+### License and republishing note
+
+MIT License, copyright (c) 2026 ryanleefm. The original Obsidian sample plugin notice is retained in THIRD_PARTY_NOTICES.md; main.js includes both notices.
+
+This 0.0.11 pre-release replaces the earlier 0.0.11 publication to adopt MIT. Plugin behavior is unchanged. If you downloaded the earlier assets, download these three files again and replace them, preserving your existing data.json.
+
 ### Features
 
 - Four semantic levels for text, file, link, and group nodes: L1 Domain, L2 Core, L3 Structure, and L4 Detail.
@@ -47,6 +53,12 @@ Please report issues in English or Chinese through [GitHub Issues](https://githu
 ## 简体中文
 
 为 Obsidian 官方 Canvas 提供语义缩放。这是早期公开测试版，帮助你通过缩小画布，从详细笔记逐步切换到结构化概览。
+
+### 许可证与重新发布说明
+
+采用 MIT 许可证，版权署名为 2026 ryanleefm。Obsidian 官方模板的原始声明保留在 THIRD_PARTY_NOTICES.md；main.js 包含两份声明。
+
+本次 0.0.11 测试版替换此前同名版本，以采用 MIT 许可证，插件功能不变。如果下载过旧附件，请重新下载并替换三个文件，保留已有 data.json。
 
 ### 功能
 

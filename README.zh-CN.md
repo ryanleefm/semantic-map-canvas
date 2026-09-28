@@ -6,7 +6,7 @@
 
 插件界面保持英文，项目说明提供中英双语。
 
-当前版本：**0.0.12**。需要桌面版 Obsidian **1.9.14 或更新版本**。这是早期测试版，移动端及广泛的主题、插件兼容性尚未验证。
+当前版本：**0.0.11**。需要桌面版 Obsidian **1.9.14 或更新版本**。这是早期测试版，移动端及广泛的主题、插件兼容性尚未验证。
 
 ## 安装
 
@@ -90,6 +90,6 @@ npm test
 
 基于 [Obsidian sample plugin](https://github.com/obsidianmd/obsidian-sample-plugin)。采用 [MIT 许可证](LICENSE)。
 
-[0.0.12 中英双语发布说明](docs/release-notes-0.0.12.md)
+[0.0.11 中英双语发布说明](docs/release-notes-0.0.11.md)
 
 模板来源与原始许可声明：[第三方声明](THIRD_PARTY_NOTICES.md)。

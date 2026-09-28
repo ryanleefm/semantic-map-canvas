@@ -6,7 +6,7 @@ Semantic zoom for the official Obsidian Canvas. Assign importance levels to note
 
 The plugin interface is in English. This guide is available in English and Chinese.
 
-Current version: **0.0.12**. Desktop Obsidian **1.9.14+** is required. This is an early testing version; mobile and broad theme/plugin compatibility have not been verified.
+Current version: **0.0.11**. Desktop Obsidian **1.9.14+** is required. This is an early testing version; mobile and broad theme/plugin compatibility have not been verified.
 
 ## Install
 
@@ -90,6 +90,6 @@ Historical development and validation reports are currently in Chinese: [Phase 1
 
 Based on the [Obsidian sample plugin](https://github.com/obsidianmd/obsidian-sample-plugin). Licensed under [MIT](LICENSE).
 
-[Bilingual release notes for 0.0.12](docs/release-notes-0.0.12.md)
+[Bilingual release notes for 0.0.11](docs/release-notes-0.0.11.md)
 
 Upstream template attribution and its original license: [third-party notices](THIRD_PARTY_NOTICES.md).
