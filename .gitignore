@@ -6,3 +6,4 @@ main.js
 VaultsforTest/
 *.tsbuildinfo
 .DS_Store
+.obsidian/

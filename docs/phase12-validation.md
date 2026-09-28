@@ -1,6 +1,6 @@
 # Phase 12 验证说明（0.0.11）
 
-状态：Phase 11 已获用户验收；Phase 12 已实现，等待真实 Obsidian 验收。
+状态：Phase 11、Phase 12 已获用户验收；正在准备 GitHub 测试版发布。
 
 ## 本阶段行为
 

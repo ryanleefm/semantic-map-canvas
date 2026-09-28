@@ -27,7 +27,9 @@
 
 测试插件安装在 `D:\semantic-map-canvas\VaultsforTest\.obsidian\plugins\semantic-map-canvas`。关闭再启用 **Semantic Map Canvas** 以加载 0.0.11。
 
-当前阶段请按 [Phase 12 验证说明](docs/phase12-validation.md) 测试新建的 **Phase 12 - Ordinary** 和 **Phase 12 - Groups** 画布。\n\n旧档位限制回归可打开 **Semantic Map Canvas - Phase 11.canvas**，不设置 L1 直接缩小，检查最终显示停在 OVERVIEW；单节点层级测试使用 **Semantic Map Canvas - Phase 11 - Ordinary.canvas**。完整步骤见 [Phase 11 验证说明](docs/phase11-validation.md)，历史性能记录见 [Phase 10 报告](docs/phase10-validation.md)。旧阶段文档保留各自交付时的验收规则，以本阶段说明为准。
+当前阶段请按 [Phase 12 验证说明](docs/phase12-validation.md) 测试新建的 **Phase 12 - Ordinary** 和 **Phase 12 - Groups** 画布。
+
+旧档位限制回归可打开 **Semantic Map Canvas - Phase 11.canvas**，不设置 L1 直接缩小，检查最终显示停在 OVERVIEW；单节点层级测试使用 **Semantic Map Canvas - Phase 11 - Ordinary.canvas**。完整步骤见 [Phase 11 验证说明](docs/phase11-validation.md)，历史性能记录见 [Phase 10 报告](docs/phase10-validation.md)。旧阶段文档保留各自交付时的验收规则，以本阶段说明为准。
 
 找不到隐藏节点时，可以放大，或执行 **Semantic Map Canvas: Toggle semantic visibility** 暂停显隐；再次执行恢复。暂停仅在本次插件运行期间有效。
 
