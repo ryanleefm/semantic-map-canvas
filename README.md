@@ -8,6 +8,20 @@ The plugin interface is in English. This guide is available in English and Chine
 
 Current release: **0.0.12**. Desktop Obsidian **1.9.14+** is required. Mobile and broad theme/plugin compatibility have not been verified.
 
+## See it in action
+
+### Auto — zoom out, keep the meaning
+
+Move from detailed notes to a clear overview by zooming out.
+
+![Automatic semantic zoom: detailed notes become compact titles and group overviews.](demogif/auto-demo.gif)
+
+### Manual — choose the view, keep the zoom
+
+Switch between Detail, Structure, Overview, and Map without changing the zoom level.
+
+![Manual display mode selection at a fixed zoom level.](demogif/manual-demo.gif)
+
 ## Install
 
 1. Open [Releases](https://github.com/ryanleefm/semantic-map-canvas/releases) and choose a release, including a pre-release if available.

@@ -8,6 +8,20 @@
 
 当前正式发布版：**0.0.12**。需要桌面版 Obsidian **1.9.14 或更新版本**。移动端及广泛的主题、插件兼容性尚未验证。
 
+## 效果演示
+
+### 自动模式：缩小画布，保留重点
+
+随着缩放，从详细笔记逐步切换到简洁标题和分组概览。
+
+![自动语义缩放：详细笔记逐步变为简洁标题和分组概览。](demogif/auto-demo.gif)
+
+### 手动模式：固定缩放，切换视图
+
+保持画布缩放不变，手动切换 Detail、Structure、Overview 和 Map 档位。
+
+![保持缩放不变，手动切换显示档位。](demogif/manual-demo.gif)
+
 ## 安装
 
 1. 打开 [Releases](https://github.com/ryanleefm/semantic-map-canvas/releases)，选择要安装的版本，包括可用的 Pre-release 测试版。
