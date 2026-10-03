@@ -1,9 +1,11 @@
+import type { DisplaySelection } from './DisplaySelection';
 import type { RenderNode } from '../canvas/CanvasRenderAdapter';
 import type { SemanticLevel } from './SemanticLevel';
 import type { SemanticStore } from './SemanticStore';
 import type { ZoomMode } from './ZoomMode';
 
 export interface DisplayModeState {
+  readonly selection: DisplaySelection;
   readonly rawMode: ZoomMode;
   readonly effectiveMode: ZoomMode;
   readonly highestLevel: SemanticLevel | null;
@@ -23,5 +25,6 @@ export function getDisplayMode(
     if (highestLevel === 1) break;
   }
   const effectiveLevel = Math.max(MODE_LEVEL[rawMode], highestLevel ?? 4) as SemanticLevel;
-  return { rawMode, highestLevel, effectiveMode: LEVEL_MODE[effectiveLevel] };
+  const selection = store.getDisplaySelection(path);
+  return { selection, rawMode, highestLevel, effectiveMode: selection === 'AUTO' ? LEVEL_MODE[effectiveLevel] : selection };
 }

@@ -1,3 +1,5 @@
+import { CanvasMenuBridge } from './canvas/CanvasMenuBridge';
+import { createDisplayMenu } from './semantic/DisplayMenu';
 import { backupLegacyMetadata } from './semantic/MetadataBackup';
 import { VisibilityController } from './rendering/VisibilityController';
 import { SemanticStore } from './semantic/SemanticStore';
@@ -10,15 +12,22 @@ export default class SemanticMapCanvasPlugin extends Plugin {
   async onload(): Promise<void> {
     const adapter = new CanvasAdapter(this.app);
     let visibility: VisibilityController | null = null;
-    const observer = new CanvasObserver(adapter, (snapshot, mode) => visibility?.update(snapshot, mode));
+    let displayMenu: CanvasMenuBridge | null = null;
+    const observer = new CanvasObserver(adapter, (snapshot, mode) => {
+      displayMenu?.bind(snapshot);
+      visibility?.update(snapshot, mode);
+    });
     let unloaded = false;
+    let layoutReady = false;
     this.register(() => {
       unloaded = true;
       observer.stop();
+      displayMenu?.clear();
       visibility?.stop();
     });
     // onLayoutReady may run after disable; the guard prevents a late timer leak.
     this.app.workspace.onLayoutReady(() => {
+      layoutReady = true;
       if (!unloaded) observer.start();
     });
     this.addCommand({
@@ -40,11 +49,14 @@ export default class SemanticMapCanvasPlugin extends Plugin {
       if (!unloaded) {
         registerSemanticMenu(this, adapter, store);
         visibility = new VisibilityController(store);
+        displayMenu = new CanvasMenuBridge(this.app, createDisplayMenu(this, store, () => observer.refresh()));
+        if (layoutReady) observer.refresh();
         this.addCommand({
           id: 'toggle-semantic-visibility',
           name: 'Toggle semantic visibility',
           callback: () => {
             const suspended = visibility?.toggleSuspended();
+            observer.refresh();
             new Notice(suspended ? 'Semantic visibility paused.' : 'Semantic visibility resumed.');
           },
         });

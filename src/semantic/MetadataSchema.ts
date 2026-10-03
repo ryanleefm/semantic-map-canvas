@@ -1,6 +1,7 @@
+import { isDisplaySelection, type DisplaySelection } from './DisplaySelection';
 import type { SemanticLevel, SemanticNodeMetadata } from './SemanticLevel';
 
-interface CanvasMetadata { nodes: Record<string, SemanticNodeMetadata> }
+interface CanvasMetadata { nodes: Record<string, SemanticNodeMetadata>; displayMode?: DisplaySelection }
 export interface StoredData { schemaVersion: 2; canvases: Record<string, CanvasMetadata> }
 
 export function dictionary<T>(): Record<string, T> { return Object.create(null) as Record<string, T>; }
@@ -30,6 +31,7 @@ export function parseMetadata(value: unknown): { data: StoredData; legacy: boole
       if (typeof node.shortLabel === 'string') nodes[id].shortLabel = node.shortLabel;
     }
     data.canvases[path] = { nodes };
+    if (isDisplaySelection(canvas.displayMode) && canvas.displayMode !== 'AUTO') data.canvases[path].displayMode = canvas.displayMode;
   }
   return { data, legacy };
 }

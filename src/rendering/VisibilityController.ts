@@ -60,7 +60,7 @@ export class VisibilityController {
       this.lastScan = now;
       const render = readRenderSnapshot(snapshot);
       const next = getDisplayMode(render.nodes, rawMode, snapshot.filePath, this.store);
-      const stateChanged = next.rawMode !== this.displayState?.rawMode
+      const stateChanged = next.selection !== this.displayState?.selection || next.rawMode !== this.displayState?.rawMode
         || next.effectiveMode !== this.displayState?.effectiveMode || next.highestLevel !== this.displayState?.highestLevel;
       this.displayState = next;
       if (stateChanged) this.logDiagnostics();

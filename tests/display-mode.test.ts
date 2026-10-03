@@ -39,7 +39,7 @@ test('defaults, live IDs and recognized types determine the cap, never stale met
   assert.equal(getDisplayMode(f.read().nodes,'MAP','A.canvas',f.store).highestLevel,2);
   for(const node of [f.node,unknown])assert.equal(node.isEditing,false);
   f.nodes.delete('only');f.nodes.delete('new-group');
-  assert.deepEqual(getDisplayMode(f.read().nodes,'MAP','A.canvas',f.store),{rawMode:'MAP',highestLevel:null,effectiveMode:'DETAIL'});
+  assert.deepEqual(getDisplayMode(f.read().nodes,'MAP','A.canvas',f.store),{selection:'AUTO',rawMode:'MAP',highestLevel:null,effectiveMode:'DETAIL'});
 });
 
 test('ordinary nodes and groups stay visible at deep zoom for every highest level',async()=>{
@@ -86,7 +86,7 @@ test('same-count replacement keeps polling while capped at DETAIL and sees undo'
 
 test('empty/lazy canvases recover and count important nodes whose DOM is not mounted',async()=>{
   const f=await minimal();f.nodes.clear();f.controller.update(f.sample(),'MAP',0);
-  assert.deepEqual(f.controller.getDisplayState(),{rawMode:'MAP',highestLevel:null,effectiveMode:'DETAIL'});
+  assert.deepEqual(f.controller.getDisplayState(),{selection:'AUTO',rawMode:'MAP',highestLevel:null,effectiveMode:'DETAIL'});
   const lazy=f.add('lazy','text',0,0);lazy.nodeEl=null as any;lazy.containerEl=null as any;
   await f.store.setLevel('A.canvas','lazy',1);f.controller.update(f.sample(),'MAP',100);
   assert.equal(f.controller.getDisplayState()?.highestLevel,1);assert.equal(f.controller.getDisplayState()?.effectiveMode,'MAP');
@@ -96,7 +96,7 @@ test('editing protection does not promote the reported highest level',async()=>{
   const f=await minimal('group');const child=f.add('child','text',100,100);
   await f.store.setLevel('A.canvas','child',4);child.isEditing=true;
   f.controller.update(f.sample(),'MAP',0);
-  assert.deepEqual(f.controller.getDisplayState(),{rawMode:'MAP',highestLevel:2,effectiveMode:'OVERVIEW'});
+  assert.deepEqual(f.controller.getDisplayState(),{selection:'AUTO',rawMode:'MAP',highestLevel:2,effectiveMode:'OVERVIEW'});
   assert.equal(child.nodeEl.classList.contains(HIDDEN_CLASS),false);
   assert.equal(f.node.nodeEl.querySelector('.smc-group-overview-label'),null);
 });
@@ -125,7 +125,7 @@ test('only display-state changes emit automatic diagnostics; no paths or node co
     f.controller.update(f.sample(),'MAP',400);assert.equal(logs.length,1);
     await f.store.setLevel('A.canvas','only',1);f.controller.update(f.sample(),'MAP',500);
     assert.equal(logs.length,2);
-    assert.deepEqual(logs[1]![1],{rawMode:'MAP',highestLevel:1,effectiveMode:'MAP'});
+    assert.deepEqual(logs[1]![1],{selection:'AUTO',rawMode:'MAP',highestLevel:1,effectiveMode:'MAP'});
     assert.equal(JSON.stringify(logs).includes('A.canvas'),false);
     assert.equal(JSON.stringify(logs).includes('secret-note'),false);
   }finally{console.debug=original;}

@@ -1,7 +1,7 @@
 {
   "id": "semantic-map-canvas",
   "name": "Semantic Map Canvas",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "minAppVersion": "1.9.14",
   "description": "Semantic zoom, node visibility and readable group overviews for the official Canvas.",
   "author": "Semantic Map Canvas contributors",

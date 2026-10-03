@@ -6,7 +6,7 @@ Semantic zoom for the official Obsidian Canvas. Assign importance levels to note
 
 The plugin interface is in English. This guide is available in English and Chinese.
 
-Current version: **0.0.11**. Desktop Obsidian **1.9.14+** is required. This is an early testing version; mobile and broad theme/plugin compatibility have not been verified.
+Current release: **0.0.12**. Desktop Obsidian **1.9.14+** is required. Mobile and broad theme/plugin compatibility have not been verified.
 
 ## Install
 
@@ -39,11 +39,24 @@ Zoom in and out to change the display. Moving or nesting a node does not change 
 
 A group keeps its edge title while it contains a visible node or group of equal or higher priority, or an object being edited. Nested groups at the default L2 keep outer titles at the edge and summarize the innermost eligible group in the center. Hiding a group does not automatically hide its contents. An edge is hidden if either endpoint is hidden.
 
-The farthest display mode follows the highest level actually present: **L1 → MAP, L2 → OVERVIEW, L3 → STRUCTURE, L4 → DETAIL**. This prevents a blank display caused solely by a missing higher level. Actual zoom remains unrestricted; extreme zoom or panning away can still make content invisible.
+In Auto, the farthest display mode follows the highest level actually present: **L1 → MAP, L2 → OVERVIEW, L3 → STRUCTURE, L4 → DETAIL**. This prevents a blank display caused solely by a missing higher level. Actual zoom remains unrestricted; extreme zoom or panning away can still make content invisible.
 
 Central titles wrap and shrink to fit. Ordinary nodes use an existing shortLabel override, otherwise the first nonempty text line, file basename, or URL hostname. Group titles use the group name. Titles are plain text. Long titles are not truncated and there is no fixed line limit. The maximum screen font size is about 24px; tiny regions require zooming in to read. There is currently no UI for editing shortLabel.
 
-If you lose track of hidden nodes, zoom in or run **Semantic Map Canvas: Toggle semantic visibility** from the command palette. This pause lasts only for the current plugin session. Disabling the plugin, switching the active canvas, or opening a normal note restores native rendering on the previous canvas. Only the active canvas is processed.
+If you lose track of hidden nodes, choose Auto or L4 ? Detail; in Auto you can also zoom in. Or run **Semantic Map Canvas: Toggle semantic visibility** from the command palette. This pause lasts only for the current plugin session. Disabling the plugin, switching the active canvas, or opening a normal note restores native rendering on the previous canvas. Only the active canvas is processed.
+
+### Auto and manual display modes
+
+Right-click the empty canvas background and open **Display mode**:
+
+- **Auto** (default): follows zoom, hysteresis and the highest-level display cap.
+- **L1 — Map**, **L2 — Overview**, **L3 — Structure**, **L4 — Detail**: fix the display to that mode while you freely zoom and pan.
+
+Manual choices do not change node Semantic levels and bypass the highest-level cap. Selecting L1 — Map without any L1 nodes can hide all nodes; right-click the background and choose Auto or L4 — Detail to recover. Zooming in alone does not leave a manual mode. Central titles continue to resize.
+
+The choice is saved per Canvas in plugin data.json, survives reopening and renaming, and defaults to Auto for old data. A failed save keeps the previous selection. Pausing semantic visibility restores native content without resetting the choice. Switching back to Auto uses the current zoom.
+
+The menu also appears in native canvas settings. The plugin extends an internal menu builder on the active Canvas instance and restores it on switch/unload. In native read-only mode, use the canvas settings menu if the background menu is unavailable.
 
 ## Data and privacy
 
@@ -90,6 +103,8 @@ Historical development and validation reports are currently in Chinese: [Phase 1
 
 Based on the [Obsidian sample plugin](https://github.com/obsidianmd/obsidian-sample-plugin). Licensed under [MIT](LICENSE).
 
-[Bilingual release notes for 0.0.11](docs/release-notes-0.0.11.md)
+[Bilingual release notes for 0.0.12](docs/release-notes-0.0.12.md)
 
 Upstream template attribution and its original license: [third-party notices](THIRD_PARTY_NOTICES.md).
+
+[Phase 13 acceptance guide (Chinese)](docs/phase13-validation.md)

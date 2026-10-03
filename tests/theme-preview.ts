@@ -53,8 +53,19 @@ async function run(){
  data.width*=.5;element.style.width=data.width+'px';controller.update(snapshot,'MAP',1500);const resized=fits();
  const complete=title.textContent===expected;
  data.text=data.label='Edited 中文 '+sample.text;controller.update(snapshot,'MAP',1800);const edited=fits();
- const passed=complete&&zoomFits.centered&&zoomFits.contained&&zoomNoReads&&zoomNoTextWrites&&steadyNoReads&&fontInvalidated&&fontFits.contained&&resized.contained&&edited.contained;
- results.push({theme,type,case:sample.name,complete,zoomNoReads,zoomNoTextWrites,steadyNoReads,fontInvalidated,zoomFits,fontFits,resized,edited,passed});
+ await store.setDisplaySelection('test.canvas',type==='group'?'OVERVIEW':'STRUCTURE');
+ controller.update({...snapshot,zoom:.04},'DETAIL',2100);world.style.transform='scale(.04)';
+ const manualFit=fits(),manualNoMeasureStart=reads;
+ controller.update({...snapshot,zoom:.08},'DETAIL',2200);world.style.transform='scale(.08)';
+ const manualStable=controller.getDisplayState().selection!=='AUTO'&&controller.getDisplayState().effectiveMode===(type==='group'?'OVERVIEW':'STRUCTURE')&&reads===manualNoMeasureStart;
+ await store.setDisplaySelection('test.canvas','MAP');controller.update(snapshot,'DETAIL',2400);
+ const manualHidden=getComputedStyle(element).visibility==='hidden';
+ await store.setDisplaySelection('test.canvas','DETAIL');controller.update(snapshot,'MAP',2700);
+ const manualDetail=!element.querySelector('.smc-fit-title')&&getComputedStyle(element).visibility!=='hidden';
+ await store.setDisplaySelection('test.canvas','AUTO');controller.update(snapshot,'MAP',3000);world.style.transform='scale(.1)';
+ const autoRecovered=!!element.querySelector('.smc-fit-title')&&controller.getDisplayState().selection==='AUTO';
+ const passed=manualFit.contained&&manualStable&&manualHidden&&manualDetail&&autoRecovered&&complete&&zoomFits.centered&&zoomFits.contained&&zoomNoReads&&zoomNoTextWrites&&steadyNoReads&&fontInvalidated&&fontFits.contained&&resized.contained&&edited.contained;
+ results.push({theme,type,case:sample.name,manualFit,manualStable,manualHidden,manualDetail,autoRecovered,complete,zoomNoReads,zoomNoTextWrites,steadyNoReads,fontInvalidated,zoomFits,fontFits,resized,edited,passed});
  // Keep labels mounted for the screenshot; controller cleanup is covered by unit tests.
  }
  const pre=document.createElement('pre');pre.id='results';pre.textContent=JSON.stringify(results);document.body.append(pre);

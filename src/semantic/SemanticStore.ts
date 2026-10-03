@@ -1,3 +1,4 @@
+import { isDisplaySelection, type DisplaySelection } from './DisplaySelection';
 import { defaultSemanticLevel, type SemanticLevel } from './SemanticLevel';
 import { dictionary, emptyMetadata, parseMetadata, type StoredData } from './MetadataSchema';
 
@@ -51,6 +52,21 @@ export class SemanticStore {
     return this.change(next => {
       const canvas = next.canvases[path] ??= { nodes: dictionary() };
       canvas.nodes[id] = { ...canvas.nodes[id], level };
+      return true;
+    });
+  }
+
+  getDisplaySelection(path: string): DisplaySelection {
+    return this.data.canvases[path]?.displayMode ?? 'AUTO';
+  }
+
+  setDisplaySelection(path: string, selection: DisplaySelection): Promise<void> {
+    if (!path.endsWith('.canvas') || !isDisplaySelection(selection)) return Promise.reject(new Error('Invalid display mode.'));
+    return this.change(next => {
+      if ((next.canvases[path]?.displayMode ?? 'AUTO') === selection) return false;
+      const canvas = next.canvases[path] ??= { nodes: dictionary() };
+      if (selection === 'AUTO') delete canvas.displayMode;
+      else canvas.displayMode = selection;
       return true;
     });
   }

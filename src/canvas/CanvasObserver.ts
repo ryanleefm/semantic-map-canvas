@@ -24,6 +24,8 @@ export class CanvasObserver {
     this.mode = null;
   }
 
+  refresh(): void { this.update(this.adapter.getSnapshot()); }
+
   logSnapshot(): void {
     const snapshot = this.adapter.getSnapshot();
     if (!snapshot) {

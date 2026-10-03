@@ -254,3 +254,5 @@ test('display caps never feed back into the raw zoom hysteresis state',async()=>
 });
 
 import './adaptive-labels.test';
+
+import './manual-display.test';
