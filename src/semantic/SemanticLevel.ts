@@ -1,7 +1,9 @@
+import type { TitleLines } from './TitleLines';
 export type SemanticLevel = 1 | 2 | 3 | 4;
 export interface SemanticNodeMetadata {
   level: SemanticLevel;
   shortLabel?: string;
+  titleLines?: TitleLines;
 }
 export const DEFAULT_SEMANTIC_LEVEL: SemanticLevel = 3;
 export function defaultSemanticLevel(nodeType: string): SemanticLevel {

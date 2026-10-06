@@ -1,3 +1,4 @@
+import type { TitleLines } from './TitleLines';
 import { cleanTitleMarkup } from './InlineMath';
 import type { GroupContainment } from './GroupHierarchy';
 import { coordinateGroups, isEditingNode, isOrdinaryNode } from './GroupVisibility';
@@ -8,6 +9,7 @@ import type { ZoomMode } from './ZoomMode';
 
 export type GroupDisplay = 'container' | 'summary' | 'hidden';
 export interface NodeVisibility {
+  readonly titleLines?: TitleLines;
   readonly visible: boolean;
   readonly compact: boolean;
   readonly label: string;
@@ -60,6 +62,7 @@ export function getVisibilityPlan(
     levels.set(node.id, level);
     const visible = (!ordinary && !group) || editing || level <= limit;
     nodes.set(node.id, {
+      titleLines: store.getTitleLines(path, node.id),
       visible,
       compact: ordinary && visible && mode !== 'DETAIL' && !editing,
       label: ordinary ? conciseLabel(node, store.getShortLabel(path, node.id)) : '',

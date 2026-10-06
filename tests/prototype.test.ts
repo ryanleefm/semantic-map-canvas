@@ -1,3 +1,4 @@
+import './title-lines.test';
 import './math-title.test';
 import './display-mode.test';
 import './containment-cache.test';
@@ -220,7 +221,7 @@ test('repeated plugin enable/disable leaves no sampling timers or workspace/vaul
       const plugin = new SemanticMapCanvasPlugin() as SemanticMapCanvasPlugin & {cleanups:Array<()=>void>};
       plugin.app = {workspace,vault} as never;await plugin.onload();timer.tick();
       assert.equal(timer.callbacks.size,1);
-      assert.equal(workspace.listeners.get('canvas:node-menu')?.size,1);
+      assert.equal(workspace.listeners.get('canvas:node-menu')?.size,2);
       for(const cleanup of plugin.cleanups)cleanup();
       timer.tick();assert.equal(timer.callbacks.size,0);
       assert.ok([...workspace.listeners.values(),...vault.listeners.values()].every(callbacks=>callbacks.size===0));

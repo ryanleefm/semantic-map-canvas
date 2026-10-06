@@ -11,7 +11,7 @@ export async function phase14Preview() {
   const labels=new AdaptiveLabels();
   const text='Understanding semantic relationships between English words';
   labels.prepare(title,text,180,100);labels.flush(.5);
-  let intact=true;const node=title.firstChild!;
+  let intact=true;const node=title.firstChild!.firstChild!;
   for(const match of text.matchAll(/[A-Za-z]+/g)) {
    const range=document.createRange();range.setStart(node,match.index);range.setEnd(node,match.index+match[0].length);
    if(range.getClientRects().length!==1)intact=false;

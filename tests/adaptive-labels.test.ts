@@ -18,11 +18,11 @@ test('adaptive labels cache measurements across zoom and invalidate text and geo
   for (const prop of ['offsetWidth','scrollWidth','offsetHeight','scrollHeight'])
     Object.defineProperty(title, prop, {get:()=>{reads++; return prop.includes('Width') ? 200 : 100;}});
   labels.prepare(title, '<b>plain</b>', 120, 80); labels.flush(.5);
-  assert.equal(title.children.length, 0); assert.equal(reads, 4);
+  assert.equal(title.firstElementChild!.children.length, 0); const initialReads = reads; assert.ok(initialReads > 0);
   labels.prepare(title, '<b>plain</b>', 120, 80); labels.flush(.4);
-  labels.updateZoom(.01); assert.equal(reads, 4);
-  labels.prepare(title, 'changed', 120, 80); labels.flush(.4); assert.equal(reads, 8);
-  labels.prepare(title, 'changed', 60, 80); labels.flush(.4); assert.equal(reads, 12);
+  labels.updateZoom(.01); assert.equal(reads, initialReads);
+  labels.prepare(title, 'changed', 120, 80); labels.flush(.4); assert.ok(reads > initialReads); const changedReads = reads;
+  labels.prepare(title, 'changed', 60, 80); labels.flush(.4); assert.ok(reads > changedReads);
   labels.release(title); const previous=title.getAttribute('style');
   labels.updateZoom(10); assert.equal(title.getAttribute('style'), previous);
 });

@@ -69,7 +69,7 @@ export class VisibilityController {
       } else {
         const plan = getVisibilityPlan(render, next.effectiveMode, snapshot.filePath, this.store, this.containment.get(render.nodes));
         this.nodes.apply(render.nodes, plan.nodes);
-        this.groups.apply(render.nodes.filter(node => plan.nodes.get(node.id)?.groupDisplay === 'summary'));
+        this.groups.apply(render.nodes.filter(node => plan.nodes.get(node.id)?.groupDisplay === 'summary'), id => this.store.getTitleLines(snapshot.filePath!, id));
         this.labels.flush(snapshot.zoom);
         this.edges.apply(render.edges, plan.hiddenEdges);
         this.overlays.apply(render.overlays ?? [], plan);

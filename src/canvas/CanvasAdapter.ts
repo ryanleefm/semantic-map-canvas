@@ -42,13 +42,13 @@ export class CanvasAdapter {
 
 
   /** Native but undocumented event; no prototype patch is necessary. */
-  onNodeMenu(listener: (menu: Menu, resolveTarget: () => SemanticNodeTarget | null) => void): EventRef {
+  onNodeMenu(listener: (menu: Menu, resolveTarget: () => SemanticNodeTarget | null) => void, title = 'Semantic level', icon = 'layers'): EventRef {
     return (this.app.workspace as Events).on('canvas:node-menu', (menu: unknown, node: unknown) => {
       const resolveTarget = () => this.getSemanticTarget(node);
       if (!resolveTarget() || !isObject(menu) || typeof (menu as Menu).addItem !== 'function') return;
       const parent = menu as Menu;
       parent.addItem(item => {
-        item.setTitle('Semantic level').setIcon('layers');
+        item.setTitle(title).setIcon(icon);
         // setSubmenu exists in desktop 1.9.14 but is absent from public typings.
         const internalItem = item as typeof item & { setSubmenu?: () => Menu };
         if (typeof internalItem.setSubmenu === 'function') {

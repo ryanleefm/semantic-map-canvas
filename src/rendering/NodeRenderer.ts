@@ -33,7 +33,7 @@ export class NodeRenderer {
           const overlay = node.container.createDiv({ cls: LABEL_CLASS });
           entry = { overlay, title: overlay.createDiv({ cls: 'smc-fit-title' }) };
         }
-        this.labels.prepare(entry.title, state.label, node.width, node.height, true);
+        this.labels.prepare(entry.title, state.label, node.width, node.height, true, state.titleLines);
       } else {
         this.releaseLabel(entry);
         entry = null;

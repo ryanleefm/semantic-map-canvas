@@ -1,3 +1,4 @@
+import type { TitleLines } from '../semantic/TitleLines';
 import { AdaptiveLabels, validLabelSize } from './AdaptiveLabels';
 import type { RenderNode } from '../canvas/CanvasRenderAdapter';
 
@@ -18,7 +19,7 @@ export class GroupOverviewRenderer {
 
   constructor(private readonly labels: AdaptiveLabels) {}
 
-  apply(nodes: readonly RenderNode[]): void {
+  apply(nodes: readonly RenderNode[], lines: (id: string) => TitleLines = () => 'AUTO'): void {
     const current = new Set<HTMLElement>();
     for (const node of nodes) {
       const element = node.element;
@@ -45,7 +46,7 @@ export class GroupOverviewRenderer {
         entry.nativeLabel.classList.add(NATIVE_GROUP_LABEL_CLASS);
       }
       const text = node.groupLabel.trim() || 'Untitled group';
-      this.labels.prepare(entry.title, text, node.width, node.height);
+      this.labels.prepare(entry.title, text, node.width, node.height, false, lines(node.id));
     }
     for (const [element, entry] of this.managed) {
       if (!current.has(element)) this.release(element, entry);

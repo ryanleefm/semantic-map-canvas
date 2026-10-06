@@ -1,3 +1,4 @@
+import { isTitleLines } from './TitleLines';
 import { isDisplaySelection, type DisplaySelection } from './DisplaySelection';
 import type { SemanticLevel, SemanticNodeMetadata } from './SemanticLevel';
 
@@ -28,6 +29,7 @@ export function parseMetadata(value: unknown): { data: StoredData; legacy: boole
         throw new Error('Invalid node metadata.');
       }
       nodes[id] = { level: ((node.level as number) + (legacy ? 1 : 0)) as SemanticLevel };
+      if (isTitleLines(node.titleLines) && node.titleLines !== 'AUTO') nodes[id].titleLines = node.titleLines;
       if (typeof node.shortLabel === 'string') nodes[id].shortLabel = node.shortLabel;
     }
     data.canvases[path] = { nodes };

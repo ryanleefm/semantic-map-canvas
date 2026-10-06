@@ -1,3 +1,5 @@
+import { phase15Performance } from './phase15-performance';
+import { phase15Preview } from './phase15-preview';
 import { phase14Preview } from './phase14-preview';
 import { VisibilityController } from '../src/rendering/VisibilityController';
 import { SemanticStore } from '../src/semantic/SemanticStore';
@@ -70,6 +72,8 @@ async function run(){
  // Keep labels mounted for the screenshot; controller cleanup is covered by unit tests.
  }
  results.push(...await phase14Preview());
+ results.push(...await phase15Preview());
+ results.push(...phase15Performance());
  const pre=document.createElement('pre');pre.id='results';pre.textContent=JSON.stringify(results);document.body.append(pre);
 }
 void run();

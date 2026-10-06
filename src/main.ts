@@ -47,7 +47,7 @@ export default class SemanticMapCanvasPlugin extends Plugin {
     try {
       await store.load();
       if (!unloaded) {
-        registerSemanticMenu(this, adapter, store);
+        registerSemanticMenu(this, adapter, store, () => observer.refresh());
         visibility = new VisibilityController(store);
         displayMenu = new CanvasMenuBridge(this.app, createDisplayMenu(this, store, () => observer.refresh()));
         if (layoutReady) observer.refresh();

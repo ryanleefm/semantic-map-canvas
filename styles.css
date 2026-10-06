@@ -30,7 +30,8 @@
   font-weight: 600;
   line-height: 1.4;
   text-align: center;
-  white-space: pre-wrap;
+  white-space: normal;
+  line-break: strict;
   overflow-wrap: break-word;
   hyphens: none;
   word-break: normal;
@@ -59,4 +60,16 @@
   overflow-wrap: normal;
   word-break: normal;
   max-width: none;
+}
+
+.smc-title-flow {
+  display: inline;
+}
+.smc-fit-title.smc-title-single-line {
+  white-space: nowrap;
+}
+
+.smc-fit-title.smc-title-measuring {
+  transform: none;
+  visibility: hidden;
 }

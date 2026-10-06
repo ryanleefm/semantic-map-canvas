@@ -6,7 +6,7 @@ Semantic zoom for the official Obsidian Canvas. Assign importance levels to note
 
 The plugin interface is in English. This guide is available in English and Chinese.
 
-Current release: **0.1.0**. Desktop Obsidian **1.9.14+** is required. Mobile and broad theme/plugin compatibility have not been verified.
+Current release: **0.1.1**. Desktop Obsidian **1.9.14+** is required. Mobile and broad theme/plugin compatibility have not been verified.
 
 ## See it in action
 
@@ -37,6 +37,8 @@ You can also build from source using the development instructions below.
 
 ## Central titles
 
+Right-click any ordinary node or group and choose **Max title lines**: **Auto** (default) or **1–5 lines**. Numbers set the maximum, not an exact line count. Choices are saved per node and applied immediately. Auto balances readable text with fewer lines. Titles remain complete without ellipsis; very long titles may become small.
+
 Ordinary-node titles support inline math such as `$E=mc^2$` and `$x_i$`, including custom short labels. English words stay together where space permits; long strings can still wrap. Formulas scale as a unit to fit. Group names remain plain text; block math is not supported.
 
 ## Use
@@ -63,7 +65,7 @@ A group keeps its edge title while it contains a visible node or group of equal 
 
 In Auto, the farthest display mode follows the highest level actually present: **L1 → MAP, L2 → OVERVIEW, L3 → STRUCTURE, L4 → DETAIL**. This prevents a blank display caused solely by a missing higher level. Actual zoom remains unrestricted; extreme zoom or panning away can still make content invisible.
 
-Central titles wrap and shrink to fit. Ordinary nodes use an existing shortLabel override, otherwise the first nonempty text line, file basename, or URL hostname. Group titles use the group name. Titles are plain text. Long titles are not truncated and there is no fixed line limit. The maximum screen font size is about 24px; tiny regions require zooming in to read. There is currently no UI for editing shortLabel.
+Central titles wrap and shrink to fit. Ordinary nodes use an existing shortLabel override, otherwise the first nonempty text line, file basename, or URL hostname. Group titles use the group name. Ordinary titles support inline math; group titles remain plain text. Titles are not truncated; Max title lines controls the optional line limit. The maximum screen font size is about 24px; tiny regions require zooming in to read. There is currently no UI for editing shortLabel.
 
 If you lose track of hidden nodes, choose Auto or L4 ? Detail; in Auto you can also zoom in. Or run **Semantic Map Canvas: Toggle semantic visibility** from the command palette. This pause lasts only for the current plugin session. Disabling the plugin, switching the active canvas, or opening a normal note restores native rendering on the previous canvas. Only the active canvas is processed.
 
@@ -125,7 +127,7 @@ Historical development and validation reports are currently in Chinese: [Phase 1
 
 Based on the [Obsidian sample plugin](https://github.com/obsidianmd/obsidian-sample-plugin). Licensed under [MIT](LICENSE).
 
-[Bilingual release notes for 0.1.0](docs/release-notes-0.1.0.md)
+[Bilingual release notes for 0.1.1](docs/release-notes-0.1.1.md)
 
 Upstream template attribution and its original license: [third-party notices](THIRD_PARTY_NOTICES.md).
 

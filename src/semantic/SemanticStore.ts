@@ -1,3 +1,4 @@
+import { isTitleLines, type TitleLines } from './TitleLines';
 import { isDisplaySelection, type DisplaySelection } from './DisplaySelection';
 import { defaultSemanticLevel, type SemanticLevel } from './SemanticLevel';
 import { dictionary, emptyMetadata, parseMetadata, type StoredData } from './MetadataSchema';
@@ -52,6 +53,22 @@ export class SemanticStore {
     return this.change(next => {
       const canvas = next.canvases[path] ??= { nodes: dictionary() };
       canvas.nodes[id] = { ...canvas.nodes[id], level };
+      return true;
+    });
+  }
+
+  getTitleLines(path: string, id: string): TitleLines {
+    return this.data.canvases[path]?.nodes[id]?.titleLines ?? 'AUTO';
+  }
+
+  setTitleLines(path: string, id: string, lines: TitleLines, nodeType = 'text'): Promise<void> {
+    if (!path.endsWith('.canvas') || !id || !isTitleLines(lines)) return Promise.reject(new Error('Invalid title lines target.'));
+    return this.change(next => {
+      if ((next.canvases[path]?.nodes[id]?.titleLines ?? 'AUTO') === lines) return false;
+      const canvas = next.canvases[path] ??= { nodes: dictionary() };
+      const node = canvas.nodes[id] ??= {level: defaultSemanticLevel(nodeType)};
+      if (lines === 'AUTO') delete node.titleLines;
+      else node.titleLines = lines;
       return true;
     });
   }
