@@ -6,7 +6,7 @@
 
 插件界面保持英文，项目说明提供中英双语。
 
-当前正式发布版：**0.0.12**。需要桌面版 Obsidian **1.9.14 或更新版本**。移动端及广泛的主题、插件兼容性尚未验证。
+当前正式发布版：**0.1.0**。需要桌面版 Obsidian **1.9.14 或更新版本**。移动端及广泛的主题、插件兼容性尚未验证。
 
 ## 效果演示
 
@@ -24,12 +24,20 @@
 
 ## 安装
 
+在 **设置 → 第三方插件 → 浏览** 中搜索并安装 **Semantic Map Canvas**。已安装用户可在第三方插件设置中检查更新。
+
+### 手动安装
+
 1. 打开 [Releases](https://github.com/ryanleefm/semantic-map-canvas/releases)，选择要安装的版本，包括可用的 Pre-release 测试版。
 2. 下载三个独立附件：**main.js**、**manifest.json** 和 **styles.css**。GitHub 自动生成的源码压缩包不是可直接安装的插件包。
 3. 在你的 vault 中创建 `.obsidian/plugins/semantic-map-canvas/`，将三个文件放入其中。
 4. 重启 Obsidian，在 **设置 → 第三方插件** 中启用 **Semantic Map Canvas**。
 
-如果尚无 Release 附件，请按下方开发说明构建源码，再复制这三个文件。发布 GitHub Release 不会自动上架 Obsidian 社区插件市场。
+也可以按下方开发说明从源码构建。
+
+## 中央标题
+
+普通节点标题支持 `$E=mc^2$`、`$x_i$` 等行内公式，包括自定义短标题。英文优先按完整单词换行，超长字符串仍可断行；公式作为整体缩放以适应节点。分组名称保持纯文本，本阶段不支持块级公式。
 
 ## 使用
 
@@ -117,7 +125,7 @@ npm test
 
 基于 [Obsidian sample plugin](https://github.com/obsidianmd/obsidian-sample-plugin)。采用 [MIT 许可证](LICENSE)。
 
-[0.0.12 中英双语发布说明](docs/release-notes-0.0.12.md)
+[0.1.0 中英双语发布说明](docs/release-notes-0.1.0.md)
 
 模板来源与原始许可声明：[第三方声明](THIRD_PARTY_NOTICES.md)。
 

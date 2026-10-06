@@ -42,3 +42,7 @@ export class Plugin {
 }
 
 export function normalizePath(path: string): string { return path.replaceAll('\\', '/').replace(/\/+/g, '/'); }
+
+export async function loadMathJax(): Promise<void> {}
+export async function finishRenderMath(): Promise<void> {}
+export function renderMath(): HTMLElement { throw new Error("Math rendering requires Obsidian"); }

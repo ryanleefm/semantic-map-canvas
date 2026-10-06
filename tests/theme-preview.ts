@@ -1,3 +1,4 @@
+import { phase14Preview } from './phase14-preview';
 import { VisibilityController } from '../src/rendering/VisibilityController';
 import { SemanticStore } from '../src/semantic/SemanticStore';
 HTMLElement.prototype.createDiv=function(o){const e=document.createElement('div');e.className=o.cls;this.append(e);return e;};
@@ -68,6 +69,7 @@ async function run(){
  results.push({theme,type,case:sample.name,manualFit,manualStable,manualHidden,manualDetail,autoRecovered,complete,zoomNoReads,zoomNoTextWrites,steadyNoReads,fontInvalidated,zoomFits,fontFits,resized,edited,passed});
  // Keep labels mounted for the screenshot; controller cleanup is covered by unit tests.
  }
+ results.push(...await phase14Preview());
  const pre=document.createElement('pre');pre.id='results';pre.textContent=JSON.stringify(results);document.body.append(pre);
 }
 void run();

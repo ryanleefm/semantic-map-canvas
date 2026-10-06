@@ -6,7 +6,7 @@ Semantic zoom for the official Obsidian Canvas. Assign importance levels to note
 
 The plugin interface is in English. This guide is available in English and Chinese.
 
-Current release: **0.0.12**. Desktop Obsidian **1.9.14+** is required. Mobile and broad theme/plugin compatibility have not been verified.
+Current release: **0.1.0**. Desktop Obsidian **1.9.14+** is required. Mobile and broad theme/plugin compatibility have not been verified.
 
 ## See it in action
 
@@ -24,12 +24,20 @@ Switch between Detail, Structure, Overview, and Map without changing the zoom le
 
 ## Install
 
+Install **Semantic Map Canvas** from **Settings → Community plugins → Browse**. Existing users can check for updates in Community plugins settings.
+
+### Manual installation
+
 1. Open [Releases](https://github.com/ryanleefm/semantic-map-canvas/releases) and choose a release, including a pre-release if available.
 2. Download its three individual assets: **main.js**, **manifest.json**, and **styles.css**. The automatically generated source archives are not installable plugin packages.
 3. Create `.obsidian/plugins/semantic-map-canvas/` inside your vault and place all three files there.
 4. Restart Obsidian and enable **Semantic Map Canvas** in **Settings → Community plugins**.
 
-If no release assets are available yet, build from source using the development instructions below and copy the same three files into your vault. A GitHub release does not automatically add the plugin to Obsidian's community catalog.
+You can also build from source using the development instructions below.
+
+## Central titles
+
+Ordinary-node titles support inline math such as `$E=mc^2$` and `$x_i$`, including custom short labels. English words stay together where space permits; long strings can still wrap. Formulas scale as a unit to fit. Group names remain plain text; block math is not supported.
 
 ## Use
 
@@ -117,7 +125,7 @@ Historical development and validation reports are currently in Chinese: [Phase 1
 
 Based on the [Obsidian sample plugin](https://github.com/obsidianmd/obsidian-sample-plugin). Licensed under [MIT](LICENSE).
 
-[Bilingual release notes for 0.0.12](docs/release-notes-0.0.12.md)
+[Bilingual release notes for 0.1.0](docs/release-notes-0.1.0.md)
 
 Upstream template attribution and its original license: [third-party notices](THIRD_PARTY_NOTICES.md).
 

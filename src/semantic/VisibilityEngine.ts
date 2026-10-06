@@ -1,3 +1,4 @@
+import { cleanTitleMarkup } from './InlineMath';
 import type { GroupContainment } from './GroupHierarchy';
 import { coordinateGroups, isEditingNode, isOrdinaryNode } from './GroupVisibility';
 import type { SemanticLevel } from './SemanticLevel';
@@ -29,13 +30,12 @@ function firstNonemptyLine(text: string): string {
   return '';
 }
 
-/** Plain text only. Never renders Markdown or HTML into the auxiliary label. */
+/** Extract title text while preserving inline math source for the renderer. */
 export function conciseLabel(node: RenderNode, override?: string): string {
   let label = override?.trim() ?? '';
   if (!label && node.type === 'text') {
     label = firstNonemptyLine(node.text);
-    label = label.replace(/^#{1,6}\s+/, '').replace(/^[-*>]\s+/, '')
-      .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1').replace(/[*_`]/g, '');
+    label = cleanTitleMarkup(label.replace(/^#{1,6}\s+/, '').replace(/^[-*>]\s+/, ''));
   }
   if (!label && node.type === 'file') label = node.file.split('/').pop()?.replace(/\.md$/i, '') ?? '';
   if (!label && node.type === 'link') {

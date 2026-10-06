@@ -1,3 +1,4 @@
+import './math-title.test';
 import './display-mode.test';
 import './containment-cache.test';
 import './map-mode.test';
