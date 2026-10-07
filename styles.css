@@ -73,3 +73,9 @@
   transform: none;
   visibility: hidden;
 }
+
+.smc-title-flow.smc-title-manual,
+.smc-title-row {
+  display: block;
+  white-space: nowrap;
+}

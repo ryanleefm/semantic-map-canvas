@@ -1,8 +1,16 @@
-import type { TitleLines } from '../semantic/TitleLines';
+/** Frozen 0.1.1 LabelLayout implementation for browser comparison only. */
+import type { TitleLines } from '../src/semantic/TitleLines';
 
-import { layoutManualLabels, flattenTitleRows } from './ManualTitleLayout';
-import { LABEL_BASE_SIZE, SCREEN_SIZE, validLabelSize, fittedScale } from './LabelMetrics';
-export { LABEL_BASE_SIZE, SCREEN_SIZE, validLabelSize, fittedScale } from './LabelMetrics';
+export const LABEL_BASE_SIZE = 32;
+export const SCREEN_SIZE = 24;
+export function validLabelSize(width: number, height: number): boolean {
+  return Number.isFinite(width) && Number.isFinite(height) && width > 0 && height > 0;
+}
+export function fittedScale(width: number, height: number, textWidth: number, textHeight: number): number {
+  if (!validLabelSize(width, height) || !validLabelSize(textWidth, textHeight)) return 0;
+  const padding = Math.min(width, height) * 0.06;
+  return Math.min((width - 2 * padding) / textWidth, (height - 2 * padding) / textHeight) * 0.98;
+}
 export interface LayoutInput {
   title: HTMLElement;
   flow: HTMLElement;
@@ -27,7 +35,6 @@ function setWidth(title: HTMLElement, width: string, single: boolean): void {
 
 /** The outer inline flow yields one fragment per title line, excluding math internals. */
 export function countTitleLines(flow: HTMLElement): number {
-  if (flow.classList.contains('smc-title-manual')) return flow.children.length;
   if (typeof flow.getClientRects !== 'function') return 1;
   let rows = 0, previousTop = NaN;
   for (const rect of Array.from(flow.getClientRects())) {
@@ -40,13 +47,6 @@ export function countTitleLines(flow: HTMLElement): number {
 
 /** At most ten candidate passes, batched across dirty titles. Zoom-only updates never enter here. */
 export function layoutLabels(inputs: readonly LayoutInput[], zoom: number): Map<HTMLElement, number> {
-  for (const input of inputs) flattenTitleRows(input.flow);
-  const result = layoutManualLabels(inputs.filter(input => input.lines !== 'AUTO'), zoom);
-  for (const [title, fit] of layoutAutoLabels(inputs.filter(input => input.lines === 'AUTO'), zoom)) result.set(title, fit);
-  return result;
-}
-
-function layoutAutoLabels(inputs: readonly LayoutInput[], zoom: number): Map<HTMLElement, number> {
   const result = new Map<HTMLElement, number>();
   for (const {title} of inputs) { title.classList.add('smc-title-measuring'); setWidth(title, 'max-content', true); }
   const naturalWidths = new Map<HTMLElement, number>();

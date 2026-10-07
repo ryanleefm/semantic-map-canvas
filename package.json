@@ -1,6 +1,6 @@
 {
   "name": "semantic-map-canvas",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Semantic zoom mode prototype for the official Obsidian Canvas.",
   "main": "main.js",
   "type": "module",

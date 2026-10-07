@@ -1,3 +1,4 @@
+import './title-partition.test';
 import './title-lines.test';
 import './math-title.test';
 import './display-mode.test';

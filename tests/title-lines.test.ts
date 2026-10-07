@@ -18,7 +18,7 @@ async function harness(type='text') {
  const node={canvas,getData:()=>({id:'n',type})};canvas.nodes.set('n',node);
  const plugin=new Plugin(),app={workspace,vault};plugin.app=app;
  registerSemanticMenu(plugin as never,new CanvasAdapter(app as never),store,()=>refreshes++);
- const open=()=>{const menu=new Menu();workspace.emit('canvas:node-menu',menu,node);return menu.items.find(i=>i.title==='Max title lines')!.submenu!.items;};
+ const open=()=>{const menu=new Menu();workspace.emit('canvas:node-menu',menu,node);return menu.items.find(i=>i.title==='Title lines')!.submenu!.items;};
  return {store,persistence,canvas,plugin,open,refreshes:()=>refreshes,writes:()=>writes,fail:()=>{fail=true;},disk:()=>disk};
 }
 test('title lines menu persists all choices for ordinary and group nodes with immediate refresh',async()=>{

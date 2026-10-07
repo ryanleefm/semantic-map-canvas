@@ -1,4 +1,5 @@
-import { phase15Performance } from './phase15-performance';
+import { phase16Preview } from './phase16-preview';
+import { phase16Performance } from './phase16-performance';
 import { phase15Preview } from './phase15-preview';
 import { phase14Preview } from './phase14-preview';
 import { VisibilityController } from '../src/rendering/VisibilityController';
@@ -73,7 +74,8 @@ async function run(){
  }
  results.push(...await phase14Preview());
  results.push(...await phase15Preview());
- results.push(...phase15Performance());
+ results.push(...await phase16Preview());
+ results.push(...phase16Performance());
  const pre=document.createElement('pre');pre.id='results';pre.textContent=JSON.stringify(results);document.body.append(pre);
 }
 void run();

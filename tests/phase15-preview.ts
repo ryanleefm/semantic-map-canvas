@@ -74,7 +74,10 @@ export async function phase15Preview() {
    let wordsIntact=true;
    if(!hasMath&&sample.name!=='URL')for(const word of text.matchAll(/[a-zA-Z]+/g)){
     if(word[0].length>30)continue;
-    const wordRange=document.createRange();wordRange.setStart(flow.firstChild!,word.index);wordRange.setEnd(flow.firstChild!,word.index+word[0].length);
+    const walker=document.createTreeWalker(flow,NodeFilter.SHOW_TEXT);const nodes:Text[]=[];
+    while(walker.nextNode())nodes.push(walker.currentNode as Text);
+    const locate=(index:number,end=false):[Text,number]=>{for(const node of nodes){if(index<node.length||(end&&index===node.length))return [node,index];index-=node.length;}throw new Error('Text offset missing');};
+    const wordRange=document.createRange(),start=locate(word.index),end=locate(word.index+word[0].length,true);wordRange.setStart(...start);wordRange.setEnd(...end);
     if(new Set([...wordRange.getClientRects()].map(r=>r.top)).size>1)wordsIntact=false;
    }
    const actualFont=Number(title.style.getPropertyValue('--smc-label-scale'))*32*.3;
@@ -97,7 +100,7 @@ export async function phase15Preview() {
    const small=parent.getBoundingClientRect(),newRange=document.createRange();newRange.selectNodeContents(flow);
    const resized=countTitleLines(flow)>0&&(limit==='AUTO'||countTitleLines(flow)<=limit)&&[...newRange.getClientRects()].every(r=>r.left>=small.left-.2&&r.right<=small.right+.2&&r.top>=small.top-.2&&r.bottom<=small.bottom+.2)&&renders===renderCount;
    parent.style.width=sample.w+'px';parent.style.height=sample.h+'px';
-   const passed=wordsIntact&&resized&&contained&&centered&&complete&&cached&&(limit==='AUTO'||lines<=limit)&&(!sample.name.endsWith('short')||lines===1);
+   const passed=wordsIntact&&resized&&contained&&centered&&complete&&cached&&(limit==='AUTO'||lines<=limit)&&(limit!=='AUTO'||!sample.name.endsWith('short')||lines===1);
    results.push({theme,type,case:sample.name,limit,lines,oldLines,actualFont,oldFont:Math.min(oldFit,2.5)*32*.3,contained,centered,complete,cached,resized,wordsIntact,elapsed,flowRects:!passed?[...flow.getClientRects()].map(r=>({y:r.y,h:r.height,w:r.width})):undefined,passed});
   }
   labels.release(title);

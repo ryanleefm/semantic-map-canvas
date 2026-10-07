@@ -41,7 +41,7 @@ export function registerSemanticMenu(plugin: Plugin, adapter: CanvasAdapter, sto
         } catch (error) { report(error); }
       }));
     }
-  }, 'Max title lines', 'align-justify'));
+  }, 'Title lines', 'align-justify'));
   plugin.registerEvent(plugin.app.vault.on('rename', (file, oldPath) => {
     void store.renamePath(oldPath, file.path).catch(report);
   }));
